@@ -62,7 +62,6 @@ ANTHROPIC_API_KEY=your-anthropic-key-here
 OPENAI_API_KEY=your-openai-key-here
 ```
 
-> **Never commit `.env` to git.** It is listed in `.gitignore`.
 
 ## Usage
 

@@ -9,6 +9,14 @@ python main.py --system path/to/prompt.txt
 import sys
 import argparse
 
+# Ensure UTF-8 output on Windows terminals
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+
+# Ensure UTF-8 output on Windows terminals
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+
 from utils import load_system_prompt, pick_model
 from chatbot import Chatbot
 from config import Colors, DEFAULT_SYSTEM_PROMPT_FILE

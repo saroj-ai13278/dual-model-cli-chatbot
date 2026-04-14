@@ -80,18 +80,17 @@ class OpenAIProvider(BaseProvider):
                 *messages
             ]
             collected = ""
-            response = self.client.chat.completions.create(
+            response = self.client.responses.create(
                 model=self.model,
-                max_tokens=DEFAULT_MAX_TOKENS,
-                messages=openai_messages,
+                input=openai_messages,
+                max_output_tokens=DEFAULT_MAX_TOKENS,
                 stream=True,
             )
 
-            for chunk in response:
-                content = chunk.choices[0].delta.content
-                if content is not None:
-                    print(content, end="", flush=True)
-                    collected += content
+            for event in response:
+                if event.type == "response.output_text.delta":
+                    print(event.delta, end="", flush=True)
+                    collected += event.delta
             return collected
         except Exception as e:
             name = type(e).__name__
